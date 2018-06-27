@@ -9,6 +9,14 @@ RUN dpkg --add-architecture i386 \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists /var/cache/apt
 
+ #install  nodejs, npm, and expo
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN apt-get install -y build-essential
+RUN apt-get install -y nodejs
+RUN npm install -g npm
+RUN npm install -g exp
+
+
 # Set up environment variables
 ENV ANDROID_HOME="/home/user/android-sdk-linux" \
     SDK_URL="https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip" \
@@ -33,5 +41,6 @@ RUN wget $GRADLE_URL -O gradle.zip \
  && mv gradle-4.5.1 gradle \
  && rm gradle.zip \
  && mkdir .gradle
+
 
 ENV PATH="/home/user/gradle/bin:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:${PATH}"

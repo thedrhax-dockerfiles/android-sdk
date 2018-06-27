@@ -16,6 +16,12 @@ docker run -it thedrhax/android-sdk bash
 docker run -it -v $(pwd):/home/user/project -w /home/user/project -u $(id -u):$(id -g) thedrhax/android-sdk gradle build
 ```
 
+### Build the project in current directory with exp
+
+```
+docker run -it -v $(pwd):/home/user/project -w /home/user/project -u $(id -u):$(id -g) thedrhax/android-sdk bash -c "exp login -u <USERNAME> -p <PASSWORD> && npm install && exp detach && cd android && ./gradlew assemble"
+```
+
 ### Persistent Android SDK and caches
 
 * `-v android-sdk:/home/user/android-sdk-linux`
