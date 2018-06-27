@@ -9,11 +9,11 @@ RUN dpkg --add-architecture i386 \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists /var/cache/apt
 
-   #install  nodejs, npm, and expo
-  RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
-  RUN apt-get install -y build-essential
-  RUN apt-get install -y nodejs
-  RUN npm install -g npm && npm install exp
+ #install  nodejs, npm, and expo
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN apt-get install -y build-essential
+RUN apt-get install -y nodejs
+RUN npm install -g npm && npm install exp
 
 
 # Set up environment variables
