@@ -30,15 +30,11 @@ RUN mkdir "$ANDROID_SDK_ROOT" .android \
  && cd .. \
  && yes | $ANDROID_SDK_ROOT/cmdline-tools/tools/bin/sdkmanager --licenses
 
-VOLUME "$ANDROID_SDK_ROOT"
-
 # Install Gradle
 RUN wget $GRADLE_URL -O gradle.zip \
  && unzip gradle.zip \
  && mv gradle-6.7 gradle \
  && rm gradle.zip \
  && mkdir .gradle
-
-VOLUME "/home/user/.gradle"
 
 ENV PATH="/home/user/gradle/bin:${ANDROID_SDK_ROOT}/platform-tools:${PATH}"
