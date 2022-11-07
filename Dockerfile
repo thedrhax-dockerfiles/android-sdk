@@ -1,4 +1,4 @@
-FROM openjdk:8
+FROM openjdk:11
 
 MAINTAINER Dmitry Karikh <the.dr.hax@gmail.com>
 
@@ -11,8 +11,8 @@ RUN dpkg --add-architecture i386 \
 
 # Set up environment variables
 ENV ANDROID_SDK_ROOT="/home/user/android-sdk-linux" \
-    SDK_URL="https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip" \
-    GRADLE_URL="https://services.gradle.org/distributions/gradle-6.7-bin.zip"
+    SDK_URL="https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip" \
+    GRADLE_URL="https://services.gradle.org/distributions/gradle-7.5.1-bin.zip"
 
 # Create a non-root user
 RUN useradd -m user
@@ -27,14 +27,17 @@ RUN mkdir "$ANDROID_SDK_ROOT" .android \
  && curl -o sdk.zip $SDK_URL \
  && unzip sdk.zip \
  && rm sdk.zip \
+ && mv cmdline-tools latest \
  && cd .. \
- && yes | $ANDROID_SDK_ROOT/cmdline-tools/tools/bin/sdkmanager --licenses
+ && yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses
 
 # Install Gradle
 RUN wget $GRADLE_URL -O gradle.zip \
  && unzip gradle.zip \
- && mv gradle-6.7 gradle \
+ && mv gradle-7.5.1 gradle \
  && rm gradle.zip \
  && mkdir .gradle
 
 ENV PATH="/home/user/gradle/bin:${ANDROID_SDK_ROOT}/platform-tools:${PATH}"
+
+ENTRYPOINT ["/bin/bash"]
