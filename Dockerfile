@@ -5,7 +5,7 @@ MAINTAINER Dmitry Karikh <the.dr.hax@gmail.com>
 # Install Git and dependencies
 RUN dpkg --add-architecture i386 \
  && apt-get update \
- && apt-get install -y file git curl zip libncurses5:i386 libstdc++6:i386 zlib1g:i386 \
+ && apt-get install -y file git curl zip libncurses5:i386 libstdc++6:i386 zlib1g:i386 jq \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists /var/cache/apt
 
